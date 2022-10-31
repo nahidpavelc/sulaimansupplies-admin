@@ -64,7 +64,8 @@
                 <div class="col-sm-12">
                   <center>
                     <label for="old_photo"><?php echo $this->lang->line("file"); ?></label><br>
-                    <img style="height:80px; width:80px;" src="//placehold.it/400x400" id="old_photo"><br>
+                    <img style="height:80px; width:80px; margin-bottom:10px;" src="<?php echo base_url('assets/upload.png') ?>" id="old_photo"><br>
+
                     <input id="photo" type="file" name="attached" onchange="readpic2345ture(this)">
                   </center>
                 </div>

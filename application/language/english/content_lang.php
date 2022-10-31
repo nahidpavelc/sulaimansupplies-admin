@@ -92,6 +92,7 @@ $lang['student_list']               = 'Student List';
 $lang['student_add']                = 'Student Add';
 $lang['student_edit']               = 'Student Edit';
 $lang['photo']                      = 'Photo';
+$lang['detail']                     = 'Detail';
 
 // common page
 $lang['body']                       = 'Body';

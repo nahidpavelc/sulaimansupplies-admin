@@ -61,6 +61,39 @@
                 </div>
               </div>
 
+              <center>
+                <div class="form-group">
+                  <div class="col-sm-12">
+
+                    <label for="old_photo"><?php echo $this->lang->line("old_file"); ?></label><br>
+                    <?php
+                    $file_parts = pathinfo($table_info->attached);
+                    if (file_exists($table_info->attached)) {
+                      if ($file_parts['extension'] != "pdf") {
+
+                    ?>
+                        <img style="height:80px; width:80px; margin:10px;" src="<?php echo base_url($table_info->attached); ?>" id="old_photo"><br>
+                      <?php
+                      } else {
+
+                      ?>
+                        <object style="height:500px;" data="<?php echo base_url($table_info->attached); ?>" type="application/pdf" width="100%">
+                        </object><br>
+                    <?php }
+                    } ?>
+
+                    <input id="photo" type="file" name="attached" onchange="readpicture(this)">
+
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    <label for="photo"><?php echo $this->lang->line("file_attached"); ?></label>
+                  </div>
+                </div>
+              </center>
+
               <!-- <div class="form-group">
                 <div class="col-sm-12">
                   <label><?php echo $this->lang->line('status'); ?> *</label>
@@ -85,35 +118,6 @@
                 </div>
               </div>
             </div>
-
-            <center>
-              <div class="form-group">
-                <div class="col-sm-12">
-                  <label for="old_photo"><?php echo $this->lang->line("old_file"); ?></label><br>
-                  <?php
-                  $file_parts = pathinfo($table_info->attached);
-                  if (file_exists($table_info->attached)) {
-                    if ($file_parts['extension'] != "pdf") {
-                  ?>
-                      <img style="height:80px; width:80px; margin:10px; " src="<?php echo base_url($table_info->attached); ?>" id="old_photo"><br>
-                    <?php
-                    } else {
-                    ?>
-                      <object style="height:500px;" data="<?php echo base_url($table_info->attached); ?>" type="application/pdf" width="100%">
-                      </object><br>
-                  <?php }
-                  } ?>
-                  <input id="photo" type="file" name="attached" onchange="readpicture(this)">
-                </div>
-              </div>
-
-              <div class="form-group">
-                <div class="col-sm-12">
-                  <label for="photo"><?php echo $this->lang->line("file_attached"); ?></label>
-                </div>
-              </div>
-            </center>
-
 
             <!-- 2nd File Upload -->
             <!-- <div class="form-group">

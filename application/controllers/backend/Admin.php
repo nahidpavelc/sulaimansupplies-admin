@@ -28,8 +28,6 @@ class Admin extends CI_Controller
 
   public function index()
   {
-
-
     $data['total_slider']   = $this->db->from("tbl_slider")->count_all_results();
     $data['total_client']   = $this->db->from("tbl_our_client")->count_all_results();
     $data['total_service']   = $this->db->from("tbl_services")->count_all_results();

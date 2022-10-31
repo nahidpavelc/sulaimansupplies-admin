@@ -16,10 +16,11 @@
               <tr>
                 <th style="background: #85c2c1; border: 1px solid #85c2c1; width: 5%;"><?php echo $this->lang->line("sl"); ?> </th>
                 <th style="background: #85c2c1; border: 1px solid #85c2c1; width: 5%;"><?php echo $this->lang->line("photo"); ?> </th>
-                <th style="background: #85c2c1; border: 1px solid #85c2c1; width: 10;"><?php echo $this->lang->line("name"); ?> </th>
+                <th style="background: #85c2c1; border: 1px solid #85c2c1; width: 17;"><?php echo $this->lang->line("name"); ?> </th>
                 <th style="background: #85c2c1; border: 1px solid #85c2c1; width: 10;"><?php echo $this->lang->line("email"); ?></th>
                 <th style="background: #85c2c1; border: 1px solid #85c2c1; width: 10;"><?php echo $this->lang->line("phone"); ?></th>
                 <th style="background: #85c2c1; border: 1px solid #85c2c1; width: 10;"><?php echo $this->lang->line("address"); ?></th>
+                <th style="background: #85c2c1; border: 1px solid #85c2c1; width: 10;"><?php echo $this->lang->line("detail"); ?></th>
                 <th style="background: #85c2c1; border: 1px solid #85c2c1; width: 10%;"><?php echo $this->lang->line("action"); ?></th>
               </tr>
             </thead>
@@ -39,6 +40,9 @@
                   <td><?php echo $value['email']; ?></td>
                   <td><?php echo $value['phone']; ?></td>
                   <td><?php echo $value['address']; ?></td>
+                  <td><?php echo character_limiter(strip_tags($value['description']), 100); ?></td>
+
+                  <!-- <?php echo character_limiter(strip_tags($value->service_details), 200); ?>  -->
 
                   <td>
                     <a href="<?php echo base_url() . 'admin/all_student/edit/' . $value['id']; ?>" class="btn btn-sm bg-green"><i class="fa fa-edit"></i></a>
