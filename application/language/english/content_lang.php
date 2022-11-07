@@ -28,6 +28,22 @@ $lang['total_work']                 = 'Total Work';
 $lang['mail_send_setting']          = 'Mail Send Setting';
 $lang['sorting_will_be_max_to_min'] = 'sorting will max to min';
 
+// User
+$lang['user']                       = 'User';
+$lang['all_user']                   = 'All User';
+$lang['all_user_add']               = 'All User Add';
+$lang['all_user_edit']              = 'All User Edit';
+$lang['all_user_list']              = 'All User List';
+
+$lang['user_add']                   = 'User Add';
+$lang['user_Edit']                  = 'User Edit';
+$lang['user_Edit']                  = 'User Edit';
+$lang['photo1']                     = 'Photo-1';
+$lang['photo2']                     = 'Photo-2';
+$lang['photo3']                     = 'Photo-3';
+$lang['photo4']                     = 'Photo-4';
+$lang['user_photo_1'] = 'User Photo 1';
+$lang['user_photo_2'] = 'User Photo 2';
 
 
 // user part
@@ -63,7 +79,7 @@ $lang['old_password']               = 'Old Password';
 $lang['new_password']               = 'New Password';
 $lang['sign_out']                   = 'Sign Out';
 $lang['mail']                       = 'Mail';
-$lang['web_mail']                   = 'Webmail';
+$lang['web_mail']                   = 'Web-mail';
 $lang['facebook']                   = 'Facebook';
 $lang['your_current_password']      = 'Your Current Password';
 $lang['current_password']           = 'Current Password';

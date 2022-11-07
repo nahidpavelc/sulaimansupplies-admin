@@ -83,6 +83,7 @@
 
 <body class="hold-transition skin-blue sidebar-mini" <?php if ($this->session->flashdata('message')) echo "onload='setTimeout(snackbar_function, 100)';" ?>>
   <div id="snackbar"><?php echo $this->session->flashdata('message'); ?></div>
+
   <div class="wrapper">
     <header class="main-header">
       <!-- Logo -->
@@ -142,6 +143,7 @@
                 <li class="footer"><a href="#">View all</a></li>
               </ul>
             </li>
+
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -191,6 +193,7 @@
         </div>
       </nav>
     </header>
+
     <!-- Left side column. contains the logo and sidebar -->
     <aside class="main-sidebar">
       <!-- sidebar: style can be found in sidebar.less -->
@@ -227,7 +230,7 @@
             </li>
 
             <!-- User  -->
-            <li class="treeview <?php if ($activeMenu === "user_list" || $activeMenu === "add_user" || $activeMenu === "user_edit") echo "active"; ?> hide">
+            <li class="treeview <?php if ($activeMenu === "user_list" || $activeMenu === "add_user" || $activeMenu === "user_edit") echo "active"; ?>">
               <a href="#">
                 <i class="fa fa-users"></i> <span> <?php echo $this->lang->line("manage_user"); ?> </span>
                 <span class="pull-right-container">
@@ -255,18 +258,50 @@
               </ul>
             </li> -->
 
+            <!-- All User -->
+            <li class="treeview <?php if ($activeMenu === "all_user_add" || $activeMenu === "all_user_list" || $activeMenu === "all_user_edit") echo "active"; ?> ">
+              <a href="#">
+                <i class="fa fa-cog"></i> <span> <?php echo $this->lang->line("all_user"); ?> </span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li class=" <?php if ($activeMenu === "all_user_add") echo "active"; ?> "><a href="<?php echo base_url('admin/all_user/add'); ?>"><i class="fa fa-circle-o"></i> <?php echo $this->lang->line("all_user_add"); ?> </a></li>
+
+                <li class=" <?php if ($activeMenu === "all_list") echo "active"; ?> "><a href="<?php echo base_url('admin/all_user/list'); ?>"><i class="fa fa-circle-o"></i> <?php echo $this->lang->line("all_user_list"); ?> </a></li>
+              </ul>
+            </li>
+
             <!-- All Student -->
-            <li class="treeview <?php if ($activeMenu === "student_add" || $activeMenu === "all_student_list" || $activeMenu === "all_student_edit") echo "active"; ?> ">
+            <li class="treeview <?php if ($activeMenu === "all_student_add" || $activeMenu === "all_student_list" || $activeMenu === "all_student_edit") echo "active"; ?> ">
               <a href="#">
                 <i class="fa fa-cog"></i> <span> <?php echo $this->lang->line("all_student"); ?> </span>
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
               </a>
+
               <ul class="treeview-menu">
                 <li class=" <?php if ($activeMenu === "all_student_add") echo "active"; ?> "><a href="<?php echo base_url('admin/all_student/add'); ?>"><i class="fa fa-circle-o"></i> <?php echo $this->lang->line("all_student_add"); ?> </a></li>
 
                 <li class=" <?php if ($activeMenu === "all_student_list") echo "active"; ?> "><a href="<?php echo base_url('admin/all_student/list'); ?>"><i class="fa fa-circle-o"></i> <?php echo $this->lang->line("all_student_list"); ?> </a></li>
+              </ul>
+            </li>
+            <!-- Our Clint -->
+            <li class="treeview <?php if ($activeMenu === "clint_add" || $activeMenu === "clint_list" || $activeMenu === "clint_edit") echo "active"; ?> ">
+
+              <a href="#">
+                <i class="fa fa-suitcase"></i> <span> <?php echo $this->lang->line('our_clint'); ?> </span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+
+              <ul class="treeview-menu">
+                <li class=" <?php if ($activeMenu === "clint_add") echo "active"; ?> "><a href="<?php echo base_url('admin/our-clint/add'); ?>"><i class="fa fa-circle-o"></i> <?php echo $this->lang->line('clint_add'); ?> </a></li>
+
+                <li class=" <?php if ($activeMenu === "clint_list") echo "active"; ?> "><a href="<?php echo base_url('admin/our-clint/list'); ?>"><i class="fa fa-circle-o"></i> <?php echo $this->lang->line('clint_list'); ?> </a></li>
               </ul>
             </li>
 
@@ -280,6 +315,7 @@
               </a>
               <ul class="treeview-menu">
                 <li class=" <?php if ($activeMenu === "testimonials_add") echo "active"; ?> "><a href="<?php echo base_url('admin/testimonial/add'); ?>"><i class="fa fa-circle-o"></i> <?php echo $this->lang->line('add_testimonial'); ?> </a></li>
+
                 <li class=" <?php if ($activeMenu === "testimonials_list") echo "active"; ?> "><a href="<?php echo base_url('admin/testimonial/list'); ?>"><i class="fa fa-circle-o"></i> <?php echo $this->lang->line('testimonial_list'); ?> </a></li>
               </ul>
             </li>
@@ -289,20 +325,6 @@
               <a href="<?php echo base_url('admin/sms_send'); ?>">
                 <i class="fa fa-envelope"></i> <span> <?php echo $this->lang->line("sms_send"); ?> </span>
               </a>
-            </li>
-
-            <!-- Our Clint -->
-            <li class="treeview <?php if ($activeMenu === "clint_add" || $activeMenu === "clint_list" || $activeMenu === "clint_edit") echo "active"; ?> ">
-              <a href="#">
-                <i class="fa fa-suitcase"></i> <span> <?php echo $this->lang->line('our_clint'); ?> </span>
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-              </a>
-              <ul class="treeview-menu">
-                <li class=" <?php if ($activeMenu === "clint_add") echo "active"; ?> "><a href="<?php echo base_url('admin/our-clint/add'); ?>"><i class="fa fa-circle-o"></i> <?php echo $this->lang->line('clint_add'); ?> </a></li>
-                <li class=" <?php if ($activeMenu === "clint_list") echo "active"; ?> "><a href="<?php echo base_url('admin/our-clint/list'); ?>"><i class="fa fa-circle-o"></i> <?php echo $this->lang->line('clint_list'); ?> </a></li>
-              </ul>
             </li>
 
             <!-- Our Work -->

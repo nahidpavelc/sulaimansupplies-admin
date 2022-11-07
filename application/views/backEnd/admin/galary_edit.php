@@ -38,14 +38,25 @@
 
                       <option value=""> <?php echo $this->lang->line('select_type'); ?> </option>
 
-                      <option value="Photo" <?php if ($gallery_info->type == 'Photo') { ?> selected <?php } ?>> <?php echo $this->lang->line('photo'); ?> </option>
+                      < option value="Photo" <?php if ($gallery_info->type == 'Photo') { ?> selected <?php } ?>>
+                        <?php echo $this->lang->line('photo'); ?>
+                      </>
 
-                      <option value="Video" <?php if ($gallery_info->type == 'Video') { ?> selected <?php } ?>> <?php echo $this->lang->line('video'); ?> </option>
+                      < option value="Video" <?php if ($gallery_info->type == 'Video') { ?> selected <?php } ?>>
+                        <?php echo $this->lang->line('video'); ?>
+                      </>
+
+                      <option <?php if (
+                                $v_schedule->employee_id ==
+                                $v_employee->employee_id
+                              )
+                                echo "selected"; ?> value="<?php echo $v_employee->employee_id ?>">
+                        <?php echo $v_employee->em_full_name; ?>
+                      </option>
 
                     </select>
 
                   </div>
-
                 </div>
 
                 <div class="form-group ">

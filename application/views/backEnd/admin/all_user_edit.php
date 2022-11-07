@@ -4,9 +4,9 @@
       <!-- Horizontal Form -->
       <div class="box box-success box-solid">
         <div class="box-header with-border">
-          <h3 class="box-title"> <?php echo $this->lang->line("student_edit"); ?> </h3>
+          <h3 class="box-title"> <?php echo $this->lang->line("user_edit"); ?> </h3>
           <div class="box-tools pull-right">
-            <a href="<?php echo base_url("admin/all_student/list"); ?>" class="btn btn-sm bg-red" style="color: white; "><i class="fa fa-list"></i> <?php echo $this->lang->line('student_list') ?> </a>
+            <a href="<?php echo base_url("admin/all_user/list"); ?>" class="btn btn-sm bg-red" style="color: white; "><i class="fa fa-list"></i> <?php echo $this->lang->line('user_list') ?> </a>
           </div>
         </div>
         <!-- /.box-header -->
@@ -58,7 +58,7 @@
 
                     <option value="1"><?php echo $this->lang->line("yes"); ?></option>
                     <option value="0"><?php echo $this->lang->line("no"); ?></option>
-                    
+
                   </select>
                 </div>
               </div>

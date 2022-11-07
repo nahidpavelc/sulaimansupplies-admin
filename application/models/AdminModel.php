@@ -271,7 +271,6 @@ class AdminModel extends CI_Model
   //Delete Services
   public function delete_services($param2)
   {
-
     return $this->db->where('id', $param2)->delete('tbl_services');
   }
 
@@ -281,7 +280,6 @@ class AdminModel extends CI_Model
     if (isset($update_service_photo['photo']) && file_exists($update_service_photo['photo'])) {
 
       $result = $this->db->select('photo')->from('tbl_service_photo')->where('service_id', $param2)->get()->row();
-
 
       if (file_exists($result->photo)) {
         unlink($result->photo);

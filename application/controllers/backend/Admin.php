@@ -44,8 +44,6 @@ class Admin extends CI_Controller
   public function theme_setting($param1 = '', $param2 = '', $param3 = '')
   {
 
-
-
     $theme_data_temp    = $this->db->get('tbl_backend_theme')->result();
     $data['theme_data'] = array();
     foreach ($theme_data_temp as $value) {
@@ -620,6 +618,151 @@ class Admin extends CI_Controller
     $this->load->view('backEnd/master_page', $data);
   }
 
+
+  // All_User
+  public function all_user($param1 = 'add', $param2 = '', $param3 = '')
+  {
+    if ($param1 == 'add') {
+
+      if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $all_user_data['name']           = $this->input->post('name', true);
+        $all_user_data['email']          = $this->input->post('email', true);
+        $all_user_data['phone']          = $this->input->post('phone', true);
+        $all_user_data['address']        = $this->input->post('address', true);
+        $all_user_data['skill']          = $this->input->post('skill', true);
+        $all_user_data['status']         = $this->input->post('status', true);
+        $all_user_data['description']    = $this->input->post('description', true);
+
+        if (!empty($_FILES["attached"]['name'])) { //exta work
+
+          $path_parts                 = pathinfo($_FILES["attached"]['name']);
+          $newfile_name               = preg_replace('/[^A-Za-z]/', "", $path_parts['filename']);
+          $dir                        = date("YmdHis", time());
+          $config['file_name']      = $newfile_name . '_' . $dir;
+          $config['remove_spaces']  = TRUE;
+          $config['upload_path']    = 'assets/allStudent/';
+          $config['max_size']       = '20000'; //  less than 20 MB
+          $config['allowed_types']  = 'jpg|png|jpeg|jpg|JPG|JPG|PNG|JPEG|pdf|docx';
+
+          $this->load->library('upload', $config);
+          $this->upload->initialize($config);
+          if (!$this->upload->do_upload('attached')) {
+          } else {
+            $upload = $this->upload->data();
+            $all_user_data['attached']   = $config['upload_path'] . $upload['file_name'];
+            $file_parts = pathinfo($all_user_data['attached']);
+            if ($file_parts['extension'] != "pdf") {
+              $this->image_size_fix($all_user_data['attached'], $width = 670, $height = 487);
+            }
+          }
+        }
+
+        $check_name_exist = $this->db->where('name', $all_user_data['name'])->get('tbl_test');
+        if ($check_name_exist->num_rows() > 0) {
+
+          $this->session->set_flashdata('message', 'This Student Already Exists!');
+          redirect('admin/all_user', 'refresh');
+        } else {
+
+          $all_user = $this->db->insert('tbl_test', $all_user_data);
+          if ($all_user) {
+
+            $this->session->set_flashdata('message', 'User created Successfully!');
+            redirect('admin/all_user', 'refresh');
+          } else {
+
+            $this->session->set_flashdata('message', 'User Create Failed!');
+            redirect('admin/all_user', 'refresh');
+          }
+        }
+      }
+      $data['title']         = 'All Student Add';
+      $data['page']          = 'backEnd/admin/all_user_add';
+      $data['activeMenu']    = 'all_user_add';
+    } elseif ($param1 == 'edit' && (int) $param2 > 0) {
+
+      $data['table_info']    = $this->db->where('id', $param2)->get('tbl_test')->row();
+      if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        //extra work
+        $path_parts                   = pathinfo($_FILES["attached"]['name']);
+        $newfile_name                 = preg_replace('/[^A-Za-z]/', "", $path_parts['filename']);
+        $dir                          = date("YmdHis", time());
+        $config['file_name']          = $newfile_name . '_' . $dir;
+        $config['remove_spaces']      = TRUE;
+        $config['max_size']           = '20000'; //  less than 20 MB
+        $config['allowed_types']      = 'jpg|png|jpeg|jpg|JPG|JPG|PNG|JPEG|pdf|docx';
+        $config['upload_path']        = 'assets/pageSettings';
+
+        $old_file_url                 = $data['table_info'];
+        $update_data['name']          = $this->input->post('name', true);
+        $update_data['email']         = $this->input->post('email', true);
+        $update_data['phone']         = $this->input->post('phone', true);
+        $update_data['address']       = $this->input->post('address', true);
+        $update_data['skill']         = $this->input->post('skill', true);
+        $update_data['status']        = $this->input->post('status', true);
+        $update_data['description']   = $this->input->post('description', true);
+
+        $this->load->library('upload', $config);
+        if (!$this->upload->do_upload('attached')) {
+
+          $this->session->set_flashdata('message', 'Data Updated Successfully');
+          $this->db->where('id', $param2)->update('tbl_test', $update_data);
+
+          redirect('admin/all_user/list', 'refresh');
+        } else {
+
+          $upload = $this->upload->data();
+
+          $update_data['attached'] = $config['upload_path'] . '/' . $upload['file_name'];
+          $this->db->where('id', $param2)->update('tbl_test', $update_data);
+          $file_parts = pathinfo($update_data['attached']);
+          if ($file_parts['extension'] != "pdf") {
+            $this->image_size_fix($update_data['attached'], $width = 670, $height = 487);
+          }
+          if (file_exists($old_file_url->attached)) unlink($old_file_url->attached);
+          $this->session->set_flashdata('message', 'Data Updated Successfully');
+          redirect('admin/all_user/list', 'refresh');
+        }
+      }
+
+      $data['all_user'] = $this->db->select('id, name')->where('id !=', $param2)->get('tbl_test')->result();
+
+      $data['title']         = 'All Student Update';
+      $data['page']          = 'backEnd/admin/all_user_edit';
+      $data['activeMenu']    = 'all_user_edit';
+    } elseif ($param1 == 'list') {
+    
+
+      $data['title']      = 'All Student List';
+      $data['page']       = 'backEnd/admin/all_user_list';
+      $data['activeMenu'] = 'all_user_list';
+      $data['table_info'] = $this->db->get('tbl_test')->result_array();
+    } elseif ($param1 == 'delete' && (int) $param2 > 0) {
+
+      $attached = $this->db->where('id', $param2)->get('tbl_test')->row()->attached;
+      if (file_exists($attached)) {
+
+        unlink($attached);
+      }
+
+      $all_user_delete = $this->db->where('id', $param2)->delete('tbl_test');
+      if ($all_user_delete) {
+
+        $this->session->set_flashdata('message', 'Page Deleted Successfully!');
+        redirect('admin/all_user/list', 'refresh');
+      } else {
+
+        $this->session->set_flashdata('message', 'Page Delete Failed!');
+        redirect('admin/all_user/list', 'refresh');
+      }
+    } else {
+
+      $this->session->set_flashdata('message', 'Wrong Attempt!');
+      redirect('admin/all_user/list', 'refresh');
+    }
+    $this->load->view('backEnd/master_page', $data);
+  }
+
   // All_Student
   public function all_student($param1 = 'add', $param2 = '', $param3 = '')
   {
@@ -996,9 +1139,7 @@ class Admin extends CI_Controller
   //     }
 
 
-
   //     $data['page_settings'] = $this->db->select('id, name')->where('id !=', $param2)->get('tbl_common_pages')->result();
-
 
 
   //     $data['title']         = 'Page Setting Update';
@@ -1020,7 +1161,6 @@ class Admin extends CI_Controller
   //     }
 
   //     $page_settings_delete = $this->db->where('id', $param2)->delete('tbl_common_pages');
-
 
 
   //     if ($page_settings_delete) {
